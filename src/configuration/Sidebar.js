@@ -9,49 +9,8 @@ export default () => {
         event.dataTransfer.effectAllowed = 'move';
     };
 
-    // const [list, setList] = useState([]);
-    const sourceList = ['Sensor 1', 'Sensor 2', 'Sensor 3'];
-    // const sourceList = 
-    // [{
-    //     label: 'Sensor 1',
-    //     inputEvents: [],
-    //     outputEvents: ['Event 1', 'Event 2', 'Event 3'],
-    //     price: '20$/d'
-    // },
-    // {
-    //     label: 'Sensor 2',
-    //     inputEvents: [],
-    //     outputEvents: ['Event A', 'Event B'],
-    //     price: '12$/d'
-    // },
-    // {
-    //     label: 'Sensor 3',
-    //     inputEvents: [],
-    //     outputEvents: ['Event 1', 'Event 2', 'Event 3', 'Event 4', 'Event 5'],
-    //     price: '7$/h'
-    // }];
-
-    const moduleList = ['Module 1', 'Module 2', 'Module 3', 'Module 4'];
-
-    // const moduleList = 
-    // [{
-    //     label: 'Sensor 1',
-    //     inputEvents: ['Event 1'],
-    //     outputEvents: ['Event 1', 'Event 2', 'Event 3'],
-    //     price: '20$/d'
-    // },
-    // {
-    //     label: 'Sensor 2',
-    //     inputEvents: ['Event C'],
-    //     outputEvents: ['Event A', 'Event B'],
-    //     price: '12$/d'
-    // },
-    // {
-    //     label: 'Sensor 3',
-    //     inputEvents: ['Event 1'],
-    //     outputEvents: ['Event 1', 'Event 2', 'Event 3', 'Event 4', 'Event 5'],
-    //     price: '7$/h'
-    // }];
+    const sourceList = ['Sensor 1', 'Sensor 2', 'Sensor 3']; //TODO get list of all existing starting points from backend
+    const moduleList = ['Module 1', 'Module 2', 'Module 3', 'Module 4']; //TODO get list of all modules from backend
 
     return (
         <aside>

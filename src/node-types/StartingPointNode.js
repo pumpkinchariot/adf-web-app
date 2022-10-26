@@ -28,7 +28,7 @@ function StartingPointNode({ data }) {
                 </div>
                 <div className='node-content'>
                     <span className='node-info'>
-                        50$/d
+                        {data['price']}$/d
                     </span>
                     <Button icon="pi pi-trash" className="p-button-text node-button" />
                 </div>

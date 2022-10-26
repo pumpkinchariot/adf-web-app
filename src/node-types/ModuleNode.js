@@ -37,7 +37,7 @@ function ModuleNode({ data }) {
                 </div>
                 <div className='node-content'>
                     <span className='node-info'>
-                        {data['price']}
+                        {data['price']}$/d
                     </span>
                     <Button icon="pi pi-trash" className="p-button-text node-button" onClick={() => console.log(data['label'])} />
                 </div>

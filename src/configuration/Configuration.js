@@ -8,7 +8,7 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 // import { Flow } from '../editor/Flow.js';
 // import ReactFlow, { MiniMap, Controls } from 'react-flow-renderer';
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { ListBox } from 'primereact/listbox';
 import ReactFlow, {
     ReactFlowProvider,
@@ -39,7 +39,9 @@ const Configuration = () => {
 
     /* Configuration Info Toolbar */
 
-    const [value, setValue] = useState('');
+    const [configTitle, setConfigTitle] = useState('');
+    const [numberOfModules, setNumberOfModules] = useState('');
+    const [estimatedCosts, setEstimatedCosts] = useState('');
 
     /* Module Editor */
 
@@ -77,51 +79,6 @@ const Configuration = () => {
         // },
     ];
 
-    const moduleList = // TODO Load list of module data from backend
-        [{
-            label: 'Sensor 1',
-            inputEvents: [],
-            outputEvents: ['Event 1', 'Event 2'],
-            price: '20$/d'
-        },
-        {
-            label: 'Sensor 2',
-            inputEvents: [],
-            outputEvents: ['Event A', 'Event B'],
-            price: '12$/d'
-        },
-        {
-            label: 'Sensor 3',
-            inputEvents: [],
-            outputEvents: ['Event 1', 'Event 2', 'Event 3'],
-            price: '7$/h'
-        },
-        {
-            label: 'Module 1',
-            inputEvents: ['Input Event 1', 'Input Event 2', 'Input Event 3'],
-            outputEvents: ['Event A', 'Event B'],
-            price: '12$/d'
-        },
-        {
-            label: 'Module 2',
-            inputEvents: ['Event XYZ'],
-            outputEvents: ['Event A', 'Event B'],
-            price: '12$/d'
-        },
-        {
-            label: 'Module 3',
-            inputEvents: ['A', 'B', 'C'],
-            outputEvents: ['Event A', 'Event B'],
-            price: '12$/d'
-        },
-        {
-            label: 'Module 4',
-            inputEvents: ['Event X'],
-            outputEvents: ['Event A', 'Event B'],
-            price: '12$/d'
-        }
-        ];
-
     const reactFlowWrapper = useRef(null);
     const [nodes, setNodes, onNodesChange] = useNodesState(nodeList);
     const [edges, setEdges, onEdgesChange] = useEdgesState(edgeList);
@@ -141,10 +98,13 @@ const Configuration = () => {
             const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
             const nodeName = event.dataTransfer.getData('nodeName');
             const nodeType = event.dataTransfer.getData('nodeCategory');
-            // console.log("ondrop: " + nodeData['label']);
 
             // check if the dropped element is valid
             if (typeof nodeName === 'undefined' || !nodeName) {
+                return;
+            }
+
+            if (typeof nodeType === 'undefined' || !nodeType) {
                 return;
             }
 
@@ -173,41 +133,50 @@ const Configuration = () => {
 
     /* Module List */
 
-    const groupedNodes = [
-        {
-            label: 'Start Nodes', code: 'SN',
-            items: [
-                { label: 'Battery Level', value: 'Berlin' },
-                { label: 'Position', value: 'Frankfurt' },
-            ]
+    const moduleList = // TODO Load list of module data from backend (List of all existing Modules)
+        [{
+            label: 'Sensor 1',
+            inputEvents: [],
+            outputEvents: ['Event 1', 'Event 2'],
+            price: 20
         },
         {
-            label: 'Modules', code: 'M',
-            items: [
-                { label: 'Weather', value: 'Chicago' },
-                { label: 'Sub', value: 'Los Angeles' },
-                { label: 'Add', value: 'New York' },
-                { label: 'Mult', value: 'San Francisco' },
-                { label: 'Div', value: 'San Francisco' },
-                { label: 'Charging Station Price', value: 'San Francisco' },
-                { label: 'Charging Station Position', value: 'San Francisco' },
-                { label: 'Union', value: 'San Francisco' },
-                { label: 'Intersect', value: 'San Francisco' },
-                { label: 'Mapping', value: 'San Francisco' },
-            ]
-        }
-    ];
+            label: 'Sensor 2',
+            inputEvents: [],
+            outputEvents: ['Event A', 'Event B'],
+            price: 12
+        },
+        {
+            label: 'Sensor 3',
+            inputEvents: [],
+            outputEvents: ['Event 1', 'Event 2', 'Event 3'],
+            price: 7
+        },
+        {
+            label: 'Module 1',
+            inputEvents: ['Input Event 1', 'Input Event 2', 'Input Event 3'],
+            outputEvents: ['Event A', 'Event B'],
+            price: 8
+        },
+        {
+            label: 'Module 2',
+            inputEvents: ['Event XYZ'],
+            outputEvents: ['Event A', 'Event B'],
+            price: 12
+        },
+        {
+            label: 'Module 3',
+            inputEvents: ['A', 'B', 'C'],
+            outputEvents: ['Event A', 'Event B'],
+            price: 12
+        },
+        {
+            label: 'Module 4',
+            inputEvents: ['Event X'],
+            outputEvents: ['Event A', 'Event B'],
+            price: 12
+        }];
 
-    const [selectedGroupedNode, setSelectedGroupedNode] = useState(null);
-
-    const groupedItemTemplate = (option) => {
-        return (
-            <div className="flex align-items-center">
-                {/* <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} /> */}
-                <div>{option.label}</div>
-            </div>
-        );
-    }
 
     /* Dialogs */
 
@@ -220,32 +189,20 @@ const Configuration = () => {
         toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     }
 
-    const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-    }
+    /* Effect Hooks */
 
-    const dialogFuncMap = {
-        'discardConfigDialog': setDiscardConfigDialog,
-        'saveConfigDialog': setSaveConfigDialog
-    }
+    useEffect(() => {
+        setNumberOfModules(nodes.length)
+    }, [nodes]);
 
-    const onClick = (name) => {
-        dialogFuncMap[`${name}`](true);
-    }
-
-    const onHide = (name) => {
-        dialogFuncMap[`${name}`](false);
-    }
-
-    // const renderFooter = (name) => {
-    //     return (
-    //         <div>
-    //             <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
-    //             <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
-    //         </div>
-    //     );
-    // }
-
+    useEffect(() => {
+        const costs = nodes
+            .map(node => moduleList.find(module => module.label === node.data.label))
+            .filter(it => it !== undefined)
+            .map(it => it.price)
+            .reduce((previous, current) => previous + current, 0);
+        setEstimatedCosts(costs);
+    }, [nodes]);
 
     return (
         <div className='configuration-info-editor'>
@@ -257,15 +214,15 @@ const Configuration = () => {
             <div className='configuration-section configuration-details-section'>
                 <div className='configuration-details'>
                     <div className='configuration-title'>
-                        <InputText value={value} onChange={(e) => setValue(e.target.value)} disabled className='configuration-title-input' />
+                        <InputText value={configTitle} onChange={(e) => setConfigTitle(e.target.value)} disabled className='configuration-title-input' />
                         <Button icon="pi pi-pencil" className="p-button-text configuration-title-edit-button" />
                     </div>
                     <div className='configuration-infos'>
                         <div className='configuration-info-text'>
-                            Number of Modules: {nodeList.length}
+                            Number of Modules: {numberOfModules}
                         </div>
                         <div className='configuration-info-text'>
-                            Estimated Cost: 50$
+                            Estimated Cost: {estimatedCosts}$/d
                         </div>
                     </div>
                 </div>
@@ -290,7 +247,6 @@ const Configuration = () => {
                     </div>
                     <div className='flow-provider-container'>
                         <ReactFlowProvider>
-                            {/* Todo CSS */}
                             <div className="reactflow-wrapper flow-container" ref={reactFlowWrapper}>
                                 <ReactFlow
                                     onInit={setReactFlowInstance}
@@ -310,7 +266,6 @@ const Configuration = () => {
                                     <Background color="#aaa" gap={16} />
                                 </ReactFlow>
                             </div>
-                            {/* <Sidebar /> */}
                         </ReactFlowProvider>
                     </div>
                 </div>
