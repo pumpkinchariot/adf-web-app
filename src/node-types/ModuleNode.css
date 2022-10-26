@@ -1,0 +1,9 @@
+.module-node {
+    min-height: 40px;
+    min-width: 180px;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 10px;
+    border-color: rgb(170, 170, 219);
+    /* background-color: #dee2e6; */
+}

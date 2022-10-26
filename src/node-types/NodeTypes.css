@@ -1,0 +1,50 @@
+.node-label {
+    text-align: center;
+    color: gray;
+    margin: 5px 10px 5px 10px;
+}
+
+.node-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    background: #8080801a;
+    margin: 0px 5px 5px 5px;
+    border-radius: 4px;}
+
+.node-info {
+    text-align: center;
+}
+
+.node-button {
+    border-width: thin;
+    border-style: solid !important;
+    height: 30px;
+    width: 30px !important;
+
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px!;
+}
+
+.node-button:focus {
+    box-shadow: none !important;
+}
+
+.input-label {
+    font-size: smaller;
+    color: gray;
+    white-space: nowrap;
+    position: absolute;
+    right: 4px;
+    text-align: right;
+    margin: 0px 14px 0px 14px;
+}
+
+.output-label {
+    font-size: smaller;
+    color: gray;
+    margin: 0px 18px 0px 18px;
+    white-space: nowrap;
+}

@@ -1,0 +1,77 @@
+.dashboard-row-spacer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 100%;
+}
+
+.dashboard-column-spacer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* SECTIONS */
+
+.dashboard-section {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.dashboard-section-title {
+    font-size: large;
+    color: #61616a;
+    padding: 15px;
+}
+
+.dashboard-running-configuration {
+    height: 40%;
+}
+
+.running-config-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.running-config-table-button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.running-config-table-button {
+    background: lightgray;
+    border-style: none !important;
+    border-radius: 3px;
+    width: 2rem !important;
+    height: 2.5em !important;
+}
+
+.running-config-table-button:hover {
+    background: gray !important;
+}
+
+.dashboard-configuration-list {
+    height: 60%;
+}
+
+.config-list-table-header {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.global-search-button {
+    background-color: #84848f !important;
+    /* border-color: transparent; */
+    border-style: none !important;
+}
+
+.configuration-overview {
+    height: 50%;
+}
+
+.configuration-detail {
+    height: 50%;
+}

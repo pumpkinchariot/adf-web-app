@@ -1,0 +1,59 @@
+.monitoring-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.running-config-preview-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.running-config-preview {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+
+/* SECTIONS */
+
+.monitoring-section-title {
+    font-size: large;
+    color: #61616a;
+    padding: 15px;
+}
+
+.monitoring-section {
+    background-color: white;
+    border-radius: 5px;
+    display:inline-block;
+}
+
+/* RUNNING CONFIGURATION */
+
+.monitoring-running-config {
+    width: 60%;
+}
+
+.monitoring-config-preview {
+    width: 40%;
+}
+
+/* MATRIX */
+
+.matrix-section {
+    width: 100%;
+}
+
+/* CONSOLE */
+
+.p-inputtextarea {
+    width: calc(100% - 20px);
+    background: #f8f9fa !important;
+    margin: 10px !important;
+}

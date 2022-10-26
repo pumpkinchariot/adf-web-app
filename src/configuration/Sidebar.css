@@ -1,0 +1,34 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px 4px 4px 4px;
+    margin: 0px 0px 0px 0px;
+}
+
+.list-group {
+    text-align: center;
+    font-weight: bold;
+    color: #61616a;
+    margin-bottom: 5px;
+}
+
+.list-item {
+    list-style-type: none;
+    border-color: rgb(170, 170, 219);
+    border-radius: 5px;
+    text-align: center;
+    color: gray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.starting-point-list-item {
+    border-style: double;
+    border-width: medium;
+}
+
+.module-list-item {
+    border-style: solid;
+    border-width: thin;
+}

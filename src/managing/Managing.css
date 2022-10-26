@@ -1,0 +1,49 @@
+
+.managing-toolbar-configuration-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* SECTIONS */
+
+.managing-section-title {
+    font-size: large;
+    color: #61616a;
+    padding: 15px;
+}
+
+.managing-section {
+    background-color: white;
+    border-radius: 5px;
+    display:inline-block;
+}
+
+/* TOOLBAR */
+
+.managing-toolbar {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    border-style: solid;
+    border-width: thin;
+    width: calc(100% - 20px);
+    margin: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.managing-toolbar > .p-button {
+    padding: 5px 10px 5px 10px;
+    border-color: #61616a;
+}
+
+.create-button{
+    background-color: rgb(174, 230, 174) !important;
+}
+
+.delete-button {
+    background-color: rgb(230, 174, 181) !important;
+}

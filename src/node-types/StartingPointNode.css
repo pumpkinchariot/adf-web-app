@@ -1,0 +1,19 @@
+.starting-point-node {
+    min-height: 50px;
+    min-width: 180px;
+    border-style: double;
+    border-width: thick;
+    border-radius: 10px;
+    border-color: rgb(170, 170, 219);
+    /* background-color: #dee2e6; */
+}
+
+.react-flow__handle {
+    top: 10px;
+    height: 12px;
+    width: 12px;
+    /* border-radius: 0px; */
+    background: white;
+    border-color: rgb(170, 170, 219);
+    border-width: thin;
+}
