@@ -21,7 +21,6 @@ function StartingPointNode({ data }) {
 
     return (
         <div className="starting-point-node">
-            {/* <Handle type="target" position={Position.Left} /> */}
             <div>
                 <div className='node-label'>
                     {data['label']}
@@ -33,13 +32,10 @@ function StartingPointNode({ data }) {
                     <Button icon="pi pi-trash" className="p-button-text node-button" />
                 </div>
             </div>
-            {/* <Handle type="source" position={Position.Right} id="a" style={{ top: 10 }} />
-            <Handle type="source" position={Position.Right} id="b" style={handleStyle} />
-            <Handle type="source" position={Position.Right} id="c" style={{ top: 30 }} /> */}
 
             {numberOfoutputEvents() > 0 &&
                 data['outputEvents'].map((item, i) =>
-                    <Handle type="source" position={Position.Right} id={String(i)} style={{ top: i * 20 + 20 }} >
+                    <Handle type="source" position={Position.Right} id={String(i)} style={{ top: i * 20 + 20 }}  key={item}>
                         <div className='output-label'>
                             {item}
                         </div>

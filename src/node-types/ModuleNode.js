@@ -25,7 +25,7 @@ function ModuleNode({ data }) {
             {/* <Handle type="target" position={Position.Left} /> */}
             {numberOfEvents(data['inputEvents']) > 0 &&
                 data['inputEvents'].map((item, i) =>
-                    <Handle type="target" position={Position.Left} id={String(i)} style={{ top: i * 20 + 20 }} >
+                    <Handle type="target" position={Position.Left} id={String(i)} style={{ top: i * 20 + 20 }} key={item}>
                         <div className='input-label'>
                             {item}
                         </div>
@@ -45,7 +45,7 @@ function ModuleNode({ data }) {
 
             {numberOfEvents(data['outputEvents']) > 0 &&
                 data['outputEvents'].map((item, i) =>
-                    <Handle type="source" position={Position.Right} id={String(i)} style={{ top: i * 20 + 20 }} >
+                    <Handle type="source" position={Position.Right} id={String(i)} style={{ top: i * 20 + 20 }} key={item}>
                         <div className='output-label'>
                             {item}
                         </div>

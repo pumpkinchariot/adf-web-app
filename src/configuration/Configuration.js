@@ -40,8 +40,13 @@ const Configuration = () => {
     /* Configuration Info Toolbar */
 
     const [configTitle, setConfigTitle] = useState('');
+    const [configInputDisabled, setConfigInputDisabled] = useState(true);
     const [numberOfModules, setNumberOfModules] = useState('');
     const [estimatedCosts, setEstimatedCosts] = useState('');
+
+    const editConfigTitle = () => {
+        setConfigInputDisabled(false);
+    }
 
     /* Module Editor */
 
@@ -185,8 +190,17 @@ const Configuration = () => {
 
     const toast = useRef(null);
 
-    const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+    const clearEditor = () => {
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'Editor cleared!', life: 3000 });
+        setNodes([]);
+        setEdges([]);
+        setDiscardConfigDialog(false);
+    }
+
+    const saveConfig = () => {
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'Configuration saved!', life: 3000 });
+        // TODO save config to backend
+        setSaveConfigDialog(false);
     }
 
     /* Effect Hooks */
@@ -206,16 +220,16 @@ const Configuration = () => {
 
     return (
         <div className='configuration-info-editor'>
+            <Toast ref={toast} />
             <ConfirmDialog visible={discardConfigDialog} onHide={() => setDiscardConfigDialog(false)} message="Are you sure you want to proceed?"
-                header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={() => setDiscardConfigDialog(false)} />
-
+                header="Confirmation" icon="pi pi-exclamation-triangle" accept={() => clearEditor()} reject={() => setDiscardConfigDialog(false)} />
             <ConfirmDialog visible={saveConfigDialog} onHide={() => setSaveConfigDialog(false)} message="Save the current configuration?"
-                header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={() => setDiscardConfigDialog(false)} />
+                header="Confirmation" icon="pi pi-exclamation-triangle" accept={() => saveConfig()} reject={() => setSaveConfigDialog(false)} />
             <div className='configuration-section configuration-details-section'>
                 <div className='configuration-details'>
                     <div className='configuration-title'>
-                        <InputText value={configTitle} onChange={(e) => setConfigTitle(e.target.value)} disabled className='configuration-title-input' />
-                        <Button icon="pi pi-pencil" className="p-button-text configuration-title-edit-button" />
+                        <InputText value={configTitle} onChange={(e) => setConfigTitle(e.target.value)} disabled={configInputDisabled} className='configuration-title-input' />
+                        <Button icon="pi pi-pencil" onClick={() => editConfigTitle()} className="p-button-text configuration-title-edit-button" />
                     </div>
                     <div className='configuration-infos'>
                         <div className='configuration-info-text'>
